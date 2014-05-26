@@ -1,0 +1,23 @@
+/r/Blossomforth emote sources
+=============================
+
+* blossomforth_dance.gif: [Hailyguilford](http://haileyguilford.deviantart.com/art/Blossomforth-s-Dance-292745357)
+* blossombbbff.png: [Zacatron94](http://zacatron94.deviantart.com/art/Pony-pack-29-374964376)
+* blossomeww.png: [nano23823](http://nano23823.deviantart.com/art/Blossomforth-can-t-see-450405312)
+* blossomforth_flying.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-flying-left-318066987)
+* blossomforth_sitting.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-sitting-left-318255560)
+* blossomforth_sleeping.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-sleeping-left-318255837)
+* blossomforth_standing.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-standing-left-318003919)
+* blossomforth_stretching.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-too-much-flexability-left-318289830)
+* blossomforth_trotting.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-trotting-left-317877486)
+* blossomhelp.png: [BeckieRGB](http://beckiergb.deviantart.com/art/A-Little-Too-Flexible-DHX-Version-292336962)
+* blossomjoy.png: [InuHoshi-to-DarkPen](http://inuhoshi-to-darkpen.deviantart.com/art/Blossomforth-327154088)
+* blossommad.png: [BurnedPigeon](http://burnedpigeon.deviantart.com/art/Blossom-Forth-400818148)
+* blossomnope.png: [punzil504](http://punzil504.deviantart.com/art/Blossomforth-394795596)
+* blossomnya.png: [ChainChomp2](http://chainchomp2.deviantart.com/art/Blossomforth-NYA-395935695)
+* blossompoker.png: [nano23823](http://nano23823.deviantart.com/art/Blossomforth-wut-face-454835469)
+* blossomshrug.png: [MegaSweet](http://megasweet.deviantart.com/art/lol-idunno-192238159)
+* blossomshock.png: [InuHoshi-to-DarkPen](http://inuhoshi-to-darkpen.deviantart.com/art/Winning-Pony-Everywhere-340344634)
+* blossomsmeel.png: [nano23823](http://nano23823.deviantart.com/art/Blossomforth-Smeel-454835736)
+* blossomsmile.png: [MarelynManson](http://marelynmanson.deviantart.com/art/Blossomforth-Corrected-292179428)
+* blossomwhat.png: [Zacatron94](http://zacatron94.deviantart.com/art/Blossomforth-and-Fluffle-Puff-382853585)

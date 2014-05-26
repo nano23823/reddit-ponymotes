@@ -1,0 +1,18 @@
+# editor detritus
+*~
+*.swp
+
+# temp files from gif manipulation
+*.tga
+
+# finished builds
+AdagioDazzle/*.gif
+AdagioDazzle/*.png
+AppleFritter/*.gif
+AppleFritter/*.png
+Blossomforth/*.gif
+Blossomforth/*.png
+CheeseSandwichmlp/*.gif
+CheeseSandwichmlp/*.png
+sunsetshimmer/*.gif
+sunsetshimmer/*.png

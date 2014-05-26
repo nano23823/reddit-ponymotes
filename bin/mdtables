@@ -1,0 +1,118 @@
+#!/bin/bash
+#
+# Read one of nano's hacky emotes.conf files,
+# and print a markdown table for use in the sidebar.
+# It's hacks all the way down.
+#
+# The environmental variable MDTPREFIX will be
+# prepended to the emote labels.
+#
+
+usage() {
+
+        echo "Usage: $ mdtables -<e|n>[a] emotes.conf nocols sheet"
+	echo
+	echo "   -e: print formatted emotes"
+	echo "   -n: do not print formatted emotes"
+	echo "   -a: alphabetize by emote name"
+        exit 1
+
+}
+
+printline() {
+
+	for i in "$@"
+	do
+		if [ "$i" == "blank70" ]; then return; fi
+		echo -n "|"
+		if [ "$i" == ":" ]; then continue; fi
+		if [ "$PRINT" == "y" ];
+		then
+			i=`echo $i | sed -e 's/sunset/ss/'`
+			echo -n "[](/$i)"
+		else
+			echo -n " "
+		fi
+	done
+	echo "|"
+	for i in "$@"
+	do
+		echo -n "|"
+		if [ "$i" == ":" ]; then continue; fi
+		i=`echo $i | sed -e 's/sunset/ss/'`
+		echo -n "$MDTPREFIX$i"
+	done
+	echo "|"
+
+}
+
+# usage tests
+if [ "$#" != "4" ]; then usage; fi
+case "$1" in
+	-ea)
+		PRINT="y"
+		ALPHA="y"
+		;;
+	-e)
+		PRINT="y"
+		ALPHA="n"
+		;;
+	-na)
+		PRINT="n"
+		ALPHA="y"
+		;;
+	-n)
+		PRINT="n"
+		ALPHA="n"
+		;;
+	*)
+		usage
+		;;
+esac
+CONF=$2
+COLS=$3
+SHEET=$4
+if [ ! -e "$CONF" ]; then usage; fi
+if ! [[ "$COLS" =~ ^[0-9]+$ ]]; then usage; fi
+
+# get the list
+if [ "$ALPHA" == "y" ]
+then
+	EMOTES=`grep ${SHEET}: ${CONF} | sort | cut -f 2 | sed -e 's/\.png//g'`
+else
+	EMOTES=`grep ${SHEET}: ${CONF} | cut -f 2 | sed -e 's/\.png//g'`
+fi
+
+# print header
+echo
+for i in `seq 1 ${COLS}`
+do
+	echo -n "| "
+done
+echo "|"
+for i in `seq 1 ${COLS}`
+do
+	echo -n "|:-:"
+done
+echo "|"
+
+# print actual table
+declare -a LINE=()
+for EMOTE in $EMOTES
+do
+	LINE=("${LINE[@]}" "$EMOTE")
+	if [ "${#LINE[@]}" == "$COLS" ]
+	then
+		printline ${LINE[@]}
+		LINE=()
+	fi
+done
+if [ "${#LINE[@]}" != "0" ]
+then
+	until [ "${#LINE[@]}" == "$COLS" ]
+	do
+		LINE=("${LINE[@]}" ":")
+	done
+	printline ${LINE[@]}
+fi
+echo

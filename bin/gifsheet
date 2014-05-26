@@ -1,0 +1,107 @@
+#!/bin/bash
+#
+# Stack animated GIFs of matching frame & rate into one,
+# since apparently append won't do it.
+# Now we can change colors, too. Hurrah!
+#
+
+usage() {
+
+	echo "Usage: $ gifsheet -h leftimg.gif rightimg.gif output.gif"
+	echo "       $ gifsheet -v topimg.gif bottomimg.gif output.gif"
+	echo "       $ gifsheet -c colors.conf input.gif output.gif"
+	exit 1
+
+}
+
+# usage tests
+if [ "$#" != "4" ]; then usage; fi
+if [ ! -e "$2" ]; then usage; fi
+if [ ! -e "$3" ]; then usage; fi
+case "$1" in
+	-h)
+		APPEND="+append"
+		;;
+	-v)
+		APPEND="-append"
+		;;
+	-c)
+		APPEND="pone"
+		;;
+	*)
+		usage
+		;;
+esac
+
+# create array for inputs
+if [ "$1" != "-c" ]
+then
+	INPUT=(`echo $2 | sed -e 's/\.gif//'` `echo $3 | sed -e 's/\.gif//'`)
+else
+	INPUT=(`echo $3 | sed -e 's/\.gif//'`)
+fi
+
+# create array for frame and delay info
+declare -a INFO=()
+for file in "${INPUT[@]}"
+do
+	INFO=("${INFO[@]}" `identify -format "%s:%T;" ${file}.gif`)
+done
+if [ "${INFO[@]:0:1}" != "${INFO[@]:(-1):1}" ]
+then
+	echo "Frame count or delays do not match!"
+	exit 1
+fi
+
+# split into frames
+for file in "${INPUT[@]}"
+do
+	convert ${file}.gif -coalesce ${file}_frame.tga
+done
+
+# do whatever we were told
+BASEO=`echo $4 | sed -e 's/\.gif//'`
+COUNT=`ls ${INPUT[@]:0:1}_frame*.tga | wc -l`
+COUNT=$((${COUNT} - 1))
+if [ "$1" != "-c" ] # join frames
+then
+	for n in `seq 0 ${COUNT}`
+	do
+		convert ${APPEND} ${INPUT[@]:0:1}_frame-${n}.tga  ${INPUT[@]:1:1}_frame-${n}.tga ${BASEO}_frame-${n}.tga
+	done
+else # recolor
+	if [ "$2" != "/dev/null" ]
+	then
+		for n in `seq 0 ${COUNT}`
+		do
+			cp ${INPUT[@]:0:1}_frame-${n}.tga ${BASEO}_frame-${n}.tga
+			while read line
+			do
+				new=`echo ${line} | sed -e 's/\;.*$//' | cut -s -d '>' -f 1`
+				old=`echo ${line} | sed -e 's/\;.*$//' | cut -s -d '>' -f 2`
+				convert ${BASEO}_frame-${n}.tga -fill ${new} -opaque ${old} ${BASEO}_frame-${n}.tga
+			done < $2
+		done
+	else
+		read -p "Input frames written. Press return to continue." foo
+		for n in `seq 0 ${COUNT}`
+		do
+				cp ${INPUT[@]:0:1}_frame-${n}.tga ${BASEO}_frame-${n}.tga
+		done
+	fi
+fi
+for file in "${INPUT[@]}"
+do
+	rm -f ${file}_frame*.tga
+done
+
+# remake gif
+CMD="convert -loop 0 -alpha set -dispose background"
+for n in `seq 0 ${COUNT}`
+do
+	DELAY=`echo ${INFO[@]:0:1} | cut -d ';' -f $((${n} + 1)) | cut -d ':' -f 2`
+	CMD="${CMD} -delay ${DELAY} ${BASEO}_frame-${n}.tga"
+done
+CMD="${CMD} $4"
+$CMD
+rm -f ${BASEO}_frame*.tga
