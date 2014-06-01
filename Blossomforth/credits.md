@@ -11,6 +11,7 @@
 * blossomforth_stretching.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-too-much-flexability-left-318289830)
 * blossomforth_trotting.gif: [fanofetcetera](http://fanofetcetera.deviantart.com/art/Blossomforth-trotting-left-317877486)
 * blossomhelp.png: [BeckieRGB](http://beckiergb.deviantart.com/art/A-Little-Too-Flexible-DHX-Version-292336962)
+* blossomhover.png: [ChainChomp2](http://chainchomp2.deviantart.com/art/A-Forgotten-Delegation-455975965)
 * blossomjoy.png: [InuHoshi-to-DarkPen](http://inuhoshi-to-darkpen.deviantart.com/art/Blossomforth-327154088)
 * blossommad.png: [BurnedPigeon](http://burnedpigeon.deviantart.com/art/Blossom-Forth-400818148)
 * blossomnope.png: [punzil504](http://punzil504.deviantart.com/art/Blossomforth-394795596)
