@@ -1,0 +1,320 @@
+#!/usr/bin/ruby
+#
+# Read one of nano's hacky emotes.conf files,
+# and print CSS rules to use the emotes.
+# 
+# Much of the preliminary stuff here builds a
+# data structure to hand off to the CSS generation
+# functions. Use the -p flag to print that out.
+#
+
+# never use global variables
+$me = "cssgen"
+$vn = "v1"
+
+# return codes copied from sysexits.h
+$EX_OK = 0
+$EX_USAGE = 64
+$EX_DATAERR = 65
+$EX_NOINPUT = 66
+$EX_IOERR = 74
+
+# calculate pixel offsets for each emote
+def appendoffsets(ehash, ecols, sheet)
+  y = 0
+  (0..(ehash[sheet].length - 1)).step(ecols) do |first|
+    x = 0
+    rowy = []
+    (first..(first + ecols - 1)).each do |index|
+      if(ehash[sheet][index] != nil)
+        rowy << ehash[sheet][index][2][1]
+      end
+    end
+    (first..(first + ecols - 1)).each do |index|
+      if(ehash[sheet][index] != nil)
+        ehash[sheet][index] << [ x, y ]
+        if(index > ecols)
+          rowx = [ x, ehash[sheet][index - ecols][3][0] ].sort
+          ehash[sheet][index][3][0] = rowx[-1]
+          ehash[sheet][index - ecols][3][0] = rowx[-1]
+        end
+        x += ehash[sheet][index][2][0]
+      end
+    end
+    y += rowy.sort[-1]
+  end
+  return ehash
+end
+
+# find the resolution of each emote
+def appendres(ehash, edir, sheet)
+  begin
+    ehash[sheet].each_index do |count|
+      source = ImageList.new(edir + ehash[sheet][count][0])
+      ehash[sheet][count] << [ source.columns, source.rows ]
+    end
+  rescue Exception => e
+    puts "cssgen #{e}"
+    exit $EX_IOERR
+  end
+  return ehash
+end
+
+# print rules for background-position
+def offsetrules(sheet, emotes, flip)
+  emotes.each_index do |index|
+    elist = []
+    elist << emotes[index][0].split(".")[0]
+    if(emotes[index][1].length != 0)
+      emotes[index][1].each_index do |ealias|
+        elist << emotes[index][1][ealias]
+      end
+    end
+    if(flip)
+      rlist = []
+      elist.each do |name|
+        rlist << "r" + name
+      end
+      elist = elist.zip(rlist).flatten!
+    end
+    elist.each_index do |index|
+      print selectorize(elist[index])
+      if(index < (elist.length - 1))
+        print ", "
+      end
+    end
+    print " { background-position: "
+    print "-" + emotes[index][3][0].to_s + "px "
+    print "-" + emotes[index][3][1].to_s + "px;"
+    puts " }"
+  end
+  puts
+end
+
+# parse an emotes.conf file
+def readconfig(ehash, cpath, sheet)
+  begin
+    econf = File.open(cpath, "r")
+  rescue Exception
+    puts $me + " could not open file: " + cpath
+    exit $EX_IOERR
+  end
+  ehash[sheet] = []
+  econf.each_line do |line|
+    begin
+      emote = line.split("\t")
+      if(emote.length < 2)
+        raise "missinginfo"
+      end
+      if(emote[1].chomp == "blank70.png")
+        next
+      end
+      this = emote[0].delete(":")
+      if(this != sheet)
+        next
+      end
+      if(emote[1].chomp.include?(" "))
+        raise "missinginfo"
+      end
+      if(emote[2])
+        aliases = emote[2].split(",")
+        aliases[-1] = aliases[-1].chomp
+        ehash[sheet] << [ emote[1], aliases ]
+      else
+        ehash[sheet] << [ emote[1].chomp, [] ]
+      end
+    rescue Exception
+      puts $me + " found a malformed line: " + line.chomp
+      exit $EX_DATAERR
+    end
+  end
+  return ehash
+end
+
+# take a string and return an emote style CSS selector
+def selectorize(emote)
+  return 'a[href|="/' + emote + '"]'
+end
+
+# print rules with shared values
+def sharedrules(sheet, emotes, flip)
+  list = {}
+  emotes.each do |emote|
+    if(!list.has_key?(emote[2]))
+      list[emote[2]] = []
+    end
+    list[emote[2]] << emote[0].split(".")[0]
+    if(emote[1].length != 0)
+      list[emote[2]] << emote[1]
+    end
+  end
+  list.each_key do |key|
+    list[key].flatten!
+  end
+  sharedrulesprint(sheet, list, nil)
+  if(flip)
+    sharedrulesprint(sheet, list, flip)
+  end
+end
+
+# subfunction for actually printing the shared rules
+def sharedrulesprint(sheet, list, flip)
+  list.each_pair do |rez, names|
+    names.each_index do |index|
+      if(flip)
+        print selectorize("r" + names[index])
+      else
+        print selectorize(names[index])
+      end
+      if(index < (names.length - 1))
+        print ", "
+      else
+        puts " {"
+      end
+    end
+    puts "    display: block;"
+    puts "    clear: none;"
+    puts "    float: left;"
+    puts "    width: " + rez[0].to_s + "px;"
+    puts "    height: " + rez[1].to_s + "px;"
+    puts "    background-image: url(%%" + sheet + "%%) !important;"
+    if(flip)
+      puts "    -webkit-transform: scaleX(-1);"
+      puts "    -moz-transform: scaleX(-1);"
+      puts "    -ms-transform: scaleX(-1);"
+      puts "    -o-transform: scaleX(-1);"
+      puts "    transform: scaleX(-1);"
+    end
+    puts "}"
+    puts
+  end
+end
+
+require 'optparse'  # used to handle command line switches
+require 'pp'        # used to print data structure
+require 'RMagick'   # used to get image properties
+include Magick
+
+# setup to deal with switches
+flags = {}
+options = OptionParser.new do |opts|
+  opts.banner = "Usage: " + $me + " [-p] [-r] [-d directory] <-s sheets> <-c columns> <emotes.conf>"
+  opts.on("-h", "--help", "print this help text and exit") do
+    raise "help"
+  end
+  opts.on("-c", "--columns x,y,z", "columns for each sheet") do |c|
+    flags[:c] = c.split(",")
+  end
+  opts.on("-d", "--directory DIR", "look for images in this directory") do |d|
+    flags[:d] = d
+  end
+  opts.on("-p", "--printdata", "just print the data structure") do |p|
+    flags[:p] = p
+  end
+  opts.on("-r", "--reverse", "also give reversed rules") do |r|
+    flags[:r] = r
+  end
+  opts.on("-s", "--sheet A,B,C", "give rules for these sheets") do |s|
+    flags[:s] = s.split(",").uniq
+  end
+  opts.on("-v", "--version", "print program version and exit") do
+    raise $vn
+  end
+end
+
+# parse the switches
+begin
+  options.parse!
+rescue Exception => e
+  case e.to_s
+  when "help"
+    puts options.help
+    exit $EX_OK
+  when $vn
+    puts $vn
+    exit $EX_OK
+  else
+    puts $me + " #{e}"
+    exit $EX_USAGE
+  end
+end
+
+# make sure we have good input
+begin
+  if(ARGV.length != 1)
+    raise "missingarg"
+  end
+  if(flags[:s].length != flags[:c].length)
+    raise "mismatch"
+  end
+  flags[:c] = flags[:c].keep_if {|e| e =~ /[0-9]+/}
+  if(flags[:s].length != flags[:c].length)
+    raise "mismatch"
+  end
+  if(flags[:c].include?("0"))
+    raise "nocolumns"
+  end
+  if(!(File.file?(ARGV[0])))
+    raise "nofile"
+  end
+rescue Exception => e
+  case e.to_s
+  when "mismatch"
+    puts $me + " needs sheets to match columns, sheets unique, and columns numeric."
+    exit $EX_USAGE
+  when "nocolumns"
+    puts $me + " columns must be nonzero."
+    exit $EX_USAGE
+  when "nofile"
+    puts $me + " input file does not exist: " + ARGV[0]
+    exit $EX_NOINPUT
+  else
+    puts options.help
+    exit $EX_USAGE
+  end
+end
+
+# set parent directory of emote files
+if(!flags[:d])
+  if(ARGV[0].include? "/")
+    edir = ARGV[0]
+    while(edir.reverse.chr != "/")
+      edir = edir.chop
+    end
+    edir = edir + "src/"
+  else
+    edir = "src/"
+  end
+else
+  edir = flags[:d]
+end
+
+# iterate through requested sheets
+ehash = {}
+flags[:s].each_index do |index|
+
+  # parse the emotes.conf file
+  ehash = readconfig(ehash, ARGV[0], flags[:s][index])
+
+  # check all the sources
+  ehash = appendres(ehash, edir, flags[:s][index])
+
+  # math this
+  ecols = flags[:c][index].to_i
+  ehash = appendoffsets(ehash, ecols, flags[:s][index])
+
+end
+
+# print data structure instead, if asked
+if(flags[:p])
+  pp ehash
+  exit $EX_OK
+else
+  puts
+end
+
+# finally, we can print some output
+ehash.each_pair do |sheet, emotes|
+  sharedrules(sheet, emotes, flags[:r])
+  offsetrules(sheet, emotes, flags[:r])
+end

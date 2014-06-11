@@ -28,5 +28,6 @@ Scripts
 
 There are several utility scripts in the bin directory:
 
+* `cssgen` - generates CSS rules for the emotes (requires ruby and [RMagick](http://www.imagemagick.org/RMagick/doc/))
 * `gifsheet` - stacks animated GIFs of matching frame and rate into one (no longer necessary since reddit started supporting CSS3), or recolors GIFs; examples for the latter exist in this repository
 * `mdtables` - generates Markdown tables containing the emotes for pasting into your sidebar
