@@ -18,7 +18,7 @@
 * cheesesquint.png: [JackSpade2012](http://jackspade2012.deviantart.com/art/Cheese-Sandwich-Face-430977717)
 * cheesestare.png: [liamwhite1](http://liamwhite1.deviantart.com/art/Cheese-Sandwich-says-hi-430862886)
 * cheesethis.png: [90Sigma](http://90sigma.deviantart.com/art/Cheese-Sandwich-431281123)
-* [](/cheesewtf) /cheesewtf: [Mushroom-Cookie-Bear](http://mushroom-cookie-bear.deviantart.com/art/Unfortunate-Implications-456422015) & [/u/DryB0nes](http://i.imgur.com/Hmvovam.jpg)
+* cheesewtf.png: [Mushroom-Cookie-Bear](http://mushroom-cookie-bear.deviantart.com/art/Unfortunate-Implications-456422015) & [/u/DryB0nes](http://i.imgur.com/Hmvovam.jpg)
 * imfine.png: [KnightTeutonic](http://knightteutonic.deviantart.com/art/Pinkie-Pie-what-no-I-m-perfectly-fine-432770262)
 * partyhard.png: [arti22](http://arti22.deviantart.com/art/Colt-Cheese-Sandwich-Vector-431077670)
 * ppcheesehug.png: [benybing](http://benybing.deviantart.com/art/Pinkie-and-Cheese-435994933)
