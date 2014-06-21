@@ -1,4 +1,4 @@
-SUBREDDITS = AppleFritter Blossomforth CheeseSandwichmlp sunsetshimmer
+SUBREDDITS = AdagioDazzle AppleFritter Blossomforth CheeseSandwichmlp sunsetshimmer
 
 .PHONY: all clean $(SUBREDDITS)
 
