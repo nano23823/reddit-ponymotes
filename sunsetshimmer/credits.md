@@ -46,6 +46,7 @@
 * sunset_shimmer_idle.gif: [Botchan-MLP](http://botchan-mlp.deviantart.com/art/Sunset-Shimmer-idle-376606055)
 * sunset_shimmer_trotting.gif: [Botchan-MLP](http://botchan-mlp.deviantart.com/art/Sunset-Shimmer-trotting-376605494)
 * demon_sunset_shimmer_idle.gif: [Botchan-MLP](http://botchan-mlp.deviantart.com/art/Equestria-Girls-Demon-Sunset-Shimmer-idle-403513341)
+* sunset_shimmer_walking.gif: [Botchan-MLP](http://botchan-mlp.deviantart.com/art/Equestria-Girls-Sunset-Shimmer-walking-463839876)
 * d6whl0i.gif: [blknblupanther](http://blknblupanther.deviantart.com/art/Clapping-Sunset-Shimmer-Icon-417365154)
 * sunsetshades.png: [kuren247](http://kuren247.deviantart.com/art/Believe-me-i-m-great-433291882)
 * sunsetchubbie.png: [4as](http://4as.deviantart.com/art/No-Touching-Flash-414169728)
