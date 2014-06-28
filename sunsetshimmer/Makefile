@@ -1,6 +1,6 @@
 SHEETS = sunnyamotes.png sunnybmotes.png chubbies.png snailssalute.png sunsetshades.png theterror.png
-ANIMOTES = clappingsunset.png sunsetgallop.png sunsetwinkout.png sunsetidle.png sunsettrot.png evilsunsetidle.png
-GIFS = sunsetgallop.gif sunsetwinkout.gif sunsetidle.gif sunsettrot.gif evilsunsetidle.gif
+ANIMOTES = clappingsunset.png sunsetgallop.png sunsetwinkout.png sunsetidle.png sunsettrot.png evilsunsetidle.png sunsetwalk.png
+GIFS = sunsetgallop.gif sunsetwinkout.gif sunsetidle.gif sunsettrot.gif evilsunsetidle.gif sunsetwalk.gif
 MFLAGS = -mode concatenate -background none -geometry +0+0
 CFLAGS = +append
 
@@ -61,6 +61,9 @@ sunsettrot.gif: src/sunset_shimmer_trotting_by_botchan_mlp-d687ynq.gif
 	convert $< -flop $@
 
 evilsunsetidle.gif: src/equestria_girls___demon_sunset_shimmer_idle_by_botchan_mlp-d6o8ovx.gif
+	convert $< -flop $@
+
+sunsetwalk.gif: src/equestria_girls___sunset_shimmer_walking_by_botchan_mlp-d7o5p50.gif
 	convert $< -flop $@
 
 clean:
