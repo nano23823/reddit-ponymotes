@@ -1,4 +1,4 @@
-SHEETS = adagioamotes.png
+SHEETS = adagiohmotes.png adagiopmotes.png
 MFLAGS = -mode concatenate -background none -geometry +0+0
 
 define get-order
@@ -7,8 +7,12 @@ endef
 
 all: $(SHEETS)
 
-adagioamotes.png: $(call get-order, "adagioamotes")
-	montage $^ $(MFLAGS) -tile 3x $@
+adagiohmotes.png: $(call get-order, "adagiohmotes")
+	montage $^ $(MFLAGS) -tile 4x $@
+	optipng $@
+
+adagiopmotes.png: $(call get-order, "adagiopmotes")
+	montage $^ $(MFLAGS) -tile 4x $@
 	optipng $@
 
 clean:
