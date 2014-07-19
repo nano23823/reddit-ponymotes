@@ -155,9 +155,9 @@ end
 while(apngs.length != 0)
   apng = apngs.pop
   if(!File.readable?(apng))
-    puts "Could not read: " + emote
+    puts "Could not read: " + apng
   elsif(File.directory?(apng))
-    puts "Was a directory: " + emote
+    puts "Was a directory: " + apng
   else
     epath = Pathname.new(apng)
     edir = epath.dirname.realpath.to_s
