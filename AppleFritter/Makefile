@@ -36,7 +36,7 @@ fritsleeping.gif: src/applefritter_sleep_left.gif
 fritstanding.gif: src/applefritter_stand_left.gif
 	../bin/gifsheet -c src/dp_gif_colors.conf $< $@
 
-frittrotting.gif: src/applefritter_trot_left_modded.gif $@
+frittrotting.gif: src/applefritter_trot_left_modded.gif
 	../bin/gifsheet -c src/dp_gif_colors.conf $< $@
 
 fritdancing.gif:
