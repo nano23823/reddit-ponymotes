@@ -1,0 +1,172 @@
+#!/usr/bin/ruby
+#
+# Read an APNG file, create a sprite sheet
+# from the frames, and generate example CSS.
+# Both constant and variable frame delays
+# are supported.
+#
+# Uses both apngdis and optipng, which
+# you will need in your path.
+#
+
+# never use global variables
+$vendpfs = ["-webkit-", "-moz-", "-o-", ""]
+
+# remove temporary files
+def clean(emote, framedir)
+  Dir.chdir(framedir)
+  FileUtils.rm(Dir.glob(emote + "*png"))
+  FileUtils.rm(Dir.glob(emote + "*txt"))
+  FileUtils.rmdir(framedir)
+end
+
+# run apngdis on the source file
+def disassemble(edir, efile, emote)
+  framedir = "/tmp/" + emote + "." + Process.pid.to_s
+  FileUtils.mkdir(framedir)
+  FileUtils.cp(edir + "/" +  efile, framedir + "/" + efile)
+  system("apngdis " + framedir + "/" + efile + " " + emote + "_frame > /dev/null 2>&1")
+  return framedir
+end
+
+# print keyframe rules (constant frame delay)
+def keyframesconst(emote, ex, fdelays)
+  ending = (fdelays.length * ex).to_s
+  $vendpfs.each do |vend|
+    puts "@" + vend + "keyframes " + emote + " {"
+    puts "    from { background-position: -0px; }"
+    puts "    to { background-position: -" + ending + "px; }"
+    puts "}"
+  end
+  puts ""
+end
+
+# print keyframe rules (variable frame delay)
+def keyframesvar(emote, ex, fdelays, total)
+  $vendpfs.each do |vend|
+    puts "@" + vend + "keyframes " + emote + " {"
+    per = 0.0
+    fdelays.each_index do |index|
+      line = "    "
+      if(per == 0.0)
+        line += "0"
+      else
+        line += per.round(3).to_s
+      end
+      line += "% { background-position: -"
+      line += (ex * index).to_s
+      line += "px; animation-timing-function: steps(1); }"
+      puts line
+      per = per + (fdelays[index][0].to_f / total.to_f) * 100
+    end
+    line = "    100% { background-position: -"
+    line += (ex * fdelays.length).to_s
+    line += "px; animation-timing-function: steps(1); }"
+    puts line, "}"
+  end
+end
+
+# spew css everywhere
+def makerules(emote, ex, ey, framedir)
+  atime = 0
+  fdelays = []
+  Dir.chdir(framedir)
+  Dir.glob(emote + "*txt").sort.each do |file|
+    delay = File.read(file).chomp.split("=")[1].split("/")
+    delay[0] = delay[0].to_i
+    delay[1] = delay[1].to_i
+    atime += delay[0]
+    fdelays << delay
+  end
+  total = atime
+  atime = atime * (1000 / fdelays[0][1])
+  if(atime > 999)
+    atime = atime.to_f / 1000
+    atime = atime.to_s + "s"
+  else
+    atime = atime.to_s + "ms"
+  end
+  if(fdelays.uniq.length == 1)
+    dands = atime + " steps(" + (fdelays.length).to_s + ")"
+    selector(emote, ex, ey, dands)
+    keyframesconst(emote, ex, fdelays)
+  else
+    selector(emote, ex, ey, atime)
+    keyframesvar(emote, ex, fdelays, total)
+  end
+end
+
+# append the frames into a single image
+def makesheet(edir, emote, framedir)
+  fdelays = []
+  Dir.chdir(framedir)
+  frames = Dir.glob("*_frame*png").sort
+  Dir.glob(emote + "*txt").sort.each do |file|
+    delay = File.read(file).chomp
+    fdelays << delay
+  end
+  if(fdelays.uniq.length != 1)
+    frames << frames[0]
+  end
+  img = ImageList.new(framedir + "/" + frames[0])
+  ex, ey = img.columns, img.rows
+  img = ImageList.new
+  frames.each do |frame|
+    img.push(Image.read(framedir + "/" + frame).first)
+  end
+  begin
+    img.append(false).write(edir + "/" + emote + "-sheet.png")
+  rescue Exception
+    puts "Could not write: " + edir + "/" + emote + "-sheet.png"
+  end
+  system("optipng " + edir + "/" + emote + "-sheet.png > /dev/null 2>&1")
+  return ex, ey
+end
+
+# print the animote selector
+def selector(emote, ex, ey, dands)
+  puts 'a[href|="/' + emote + '"] {'
+  puts "    display: block;"
+  puts "    clear: none;"
+  puts "    float: left;"
+  puts "    width: " + ex.to_s + "px;"
+  puts "    height: " + ey.to_s + "px;"
+  puts "    background-image: url(%%" + emote + "-sheet%%) !important;"
+  puts "    -webkit-animation: "+ emote + " " + dands + " infinite;"
+  puts "    -moz-animation: "+ emote + " " + dands + " infinite;"
+  puts "    -o-animation: "+ emote + " " + dands + " infinite;"
+  puts "    animation: "+ emote + " " + dands + " infinite;"
+  puts "}", ""
+end
+
+require 'pathname'    # used for cheating
+require 'fileutils'   # used to manage temp files
+require 'RMagick'     # used to get image properties
+include Magick
+
+# check our input
+apngs = ARGV.reverse
+if(apngs.length == 0)
+  puts "At least one input file is needed."
+  exit 66
+end
+
+# convert each file given
+while(apngs.length != 0)
+  apng = apngs.pop
+  if(!File.readable?(apng))
+    puts "Could not read: " + emote
+  elsif(File.directory?(apng))
+    puts "Was a directory: " + emote
+  else
+    epath = Pathname.new(apng)
+    edir = epath.dirname.realpath.to_s
+    efile = epath.basename.to_s
+    emote = File.basename(efile, ".*")
+    framedir = disassemble(edir, efile, emote)
+    ex, ey = makesheet(edir, emote, framedir)
+    puts "", "Created " + edir + "/" + emote + "-sheet.png", ""
+    makerules(emote, ex, ey, framedir)
+    clean(emote, framedir)
+  end
+end
