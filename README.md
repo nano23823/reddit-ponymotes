@@ -29,7 +29,7 @@ Scripts
 
 There are several utility scripts in the bin directory:
 
-* `animote2css` - converts an APNG into a sprite sheet with CSS3 animation rules
-* `cssgen` - generates CSS rules for the emotes (requires ruby and [RMagick](http://www.imagemagick.org/RMagick/doc/))
+* `animote2css` - converts an APNG into a sprite sheet with CSS3 animation rules (requires ruby and [RMagick](http://www.imagemagick.org/RMagick/doc/))
+* `cssgen` - generates CSS rules for the emotes (same)
 * `gifsheet` - stacks animated GIFs of matching frame and rate into one (no longer necessary since reddit started supporting CSS3), or recolors GIFs; examples for the latter exist in this repository
 * `mdtables` - generates Markdown tables containing the emotes for pasting into your sidebar
