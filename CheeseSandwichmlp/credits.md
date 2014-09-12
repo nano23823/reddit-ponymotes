@@ -23,3 +23,4 @@
 * partyhard.png: [arti22](http://arti22.deviantart.com/art/Colt-Cheese-Sandwich-Vector-431077670)
 * ppcheesehug.png: [benybing](http://benybing.deviantart.com/art/Pinkie-and-Cheese-435994933)
 * rubberchickendance.png: [nero-narmeril](http://nero-narmeril.deviantart.com/art/Do-the-rubber-chicken-dance-431016937)
+* sarcasticcheese.png: [Sonnatora](http://sonnatora.deviantart.com/art/Cheese-Sandwich-481608716)
