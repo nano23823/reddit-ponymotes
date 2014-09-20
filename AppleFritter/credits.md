@@ -29,6 +29,7 @@
 * fritsmeel.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-Smeel-434216070)
 * fritsmile.png: [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
 * fritsmirk.png: [RainbowPlasma](http://rainbowplasma.deviantart.com/art/Apple-Fritter-Apple-Family-Collab-313745430)
+* fritteehee.png: [SmittyG](http://smittyg.deviantart.com/art/Rainbow-Dash-and-AppleJack-203865900)
 * fritwhat.png: [Carp](http://broni.es/printthread.php?tid=2320&page=2)
 * frityay.png: [thatguy1945](http://thatguy1945.deviantart.com/art/Apple-Fritter-hugs-344202644)
 * fritspet.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-s-pet-beaver-438987437)
