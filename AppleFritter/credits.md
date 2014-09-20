@@ -8,6 +8,7 @@
 * fritapple.png: [Durpy](http://durpy.deviantart.com/art/Appaloosa-Fritter-290904050)
 * fritbake.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-decorating-cupcakes-for-Chrysalis-442879726)
 * fritbbbff.png: [Background Pony](http://derpiboo.ru/544765)
+* fritblush.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-blushing-483598670)
 * fritbow.png: [thehellbean](http://thehellbean.deviantart.com/art/Apple-Fritter-Bowing-to-Cadence-299126794)
 * fritchubbie.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-chubbie-442315373)
 * fritchubbie_hover.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-chubbie-442315373)
