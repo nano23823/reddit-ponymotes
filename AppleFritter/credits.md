@@ -22,6 +22,7 @@
 * frithmph.png: [Flash-draw](http://flash-draw.deviantart.com/art/Apple-Fritter-Dancing-304438816)
 * frithoof.png: [RainbowDerp98](http://rainbowderp98.deviantart.com/art/Dash-Face-Hoof-316831302) & [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
 * fritlie.png: [videogamesizzle](http://videogamesizzle.deviantart.com/art/Shifty-Apple-Jack-258941694) & [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
+* fritjoke.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-tells-a-joke-483675812)
 * fritmad.png: [bobsicle0](http://bobsicle0.deviantart.com/art/Roseluck-Scrunch-421232989) & [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
 * fritnoway.png: [DaringDashie](http://daringdashie.deviantart.com/art/Apple-Fritter-GASP-338360021)
 * fritnya.png: [ChainChomp2](http://chainchomp2.deviantart.com/art/Apple-Fritter-NYA-389265984)
