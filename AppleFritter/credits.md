@@ -27,6 +27,7 @@
 * fritnoway.png: [DaringDashie](http://daringdashie.deviantart.com/art/Apple-Fritter-GASP-338360021)
 * fritnya.png: [ChainChomp2](http://chainchomp2.deviantart.com/art/Apple-Fritter-NYA-389265984)
 * fritsad.png: [CheshireTwilight](http://cheshiretwilight.deviantart.com/art/Apple-Fritter-is-depressed-388170705)
+* fritsalute.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-saluting-483792353)
 * fritshrug.png: [MegaSweet](http://megasweet.deviantart.com/art/lol-idunno-192238159)
 * fritsmeel.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-Smeel-434216070)
 * fritsmile.png: [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
