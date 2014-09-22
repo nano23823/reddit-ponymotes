@@ -19,6 +19,7 @@
 * fritderp.png: [Hourglass-Vectors](http://hourglass-vectors.deviantart.com/art/Does-this-look-like-the-face-of-mercy-to-you-427924087) & [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
 * fritgrin.png: [solusjbj](http://solusjbj.deviantart.com/art/Apple-Fritter-BG-pony-216553173)
 * frithappy.png: [90Sigma](http://90sigma.deviantart.com/art/Apple-Strudely-312895650)
+* frithmmm.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-ponders-483857524)
 * frithmph.png: [Flash-draw](http://flash-draw.deviantart.com/art/Apple-Fritter-Dancing-304438816)
 * frithoof.png: [RainbowDerp98](http://rainbowderp98.deviantart.com/art/Dash-Face-Hoof-316831302) & [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
 * fritlie.png: [videogamesizzle](http://videogamesizzle.deviantart.com/art/Shifty-Apple-Jack-258941694) & [Atmospark](http://atmospark.deviantart.com/art/Apple-Fritter-291672563)
