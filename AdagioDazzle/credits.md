@@ -1,6 +1,8 @@
 /r/AdagioDazzle emote sources
 =============================
 
+* adagio_dazzle_idle.gif: [Botchan-MLP](equestria_girls___adagio_dazzle_idle_by_botchan_mlp-d7yy65h.gif)
+* adagio_dazzle_walking.gif: [Botchan-MLP](equestria_girls___adagio_dazzle_walking_by_botchan_mlp-d7yy65y.gif)
 * adagiodownvote.png: [WX42](http://wx42.deviantart.com/art/You-fail-471309154)
 * adagiolook.png: [TheShadowStone](http://theshadowstone.deviantart.com/art/Oh-What-s-So-Wrong-With-a-Little-Competition-473013009)
 * confidentadagio.png: [TheShadowStone](http://theshadowstone.deviantart.com/art/Why-Don-t-We-See-Who-Is-Better-473491474)
