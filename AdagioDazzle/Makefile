@@ -21,10 +21,10 @@ adagiopmotes.png: $(call get-order, "adagiopmotes")
 	gif2apng $< $@
 
 adagiostanding.gif: src/equestria_girls___adagio_dazzle_idle_by_botchan_mlp-d7yy65h.gif
-	convert $< -flop $@
+	convert $< -flop -scale 50% $@
 
 adagiowalking.gif: src/equestria_girls___adagio_dazzle_walking_by_botchan_mlp-d7yy65y.gif
-	convert $< -flop $@
+	convert $< -flop -scale 50% $@
 
 clean:
 	-$(RM) $(SHEETS) $(ANIMOTES) $(GIFS)
