@@ -10,3 +10,7 @@
 * adagiosmirk.png: [nano23823](http://nano23823.deviantart.com/art/What-s-so-wrong-with-a-little-competition-470926494)
 * adagioreally.png: [WX42](http://wx42.deviantart.com/art/Please-stop-being-a-jerk-477095539)
 * tickedadagio.png: [WX42](http://wx42.deviantart.com/art/Shut-up-480578425)
+* cooladagio.png: [AlicornOverlord](http://alicornoverlord.deviantart.com/art/JOIN-ME-Offline-485109484)
+* adagiowow.png: [VaniaEditors](http://vaniaeditors.deviantart.com/art/Adagio-Dazzle-477701173)
+* adagiosings.png: [WX42](http://wx42.deviantart.com/art/Adagio-sings-485094688)
+* adagiowelcome.png: [AlicornOverlord](http://alicornoverlord.deviantart.com/art/KAME-HAME-HA-485215804)
