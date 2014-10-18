@@ -38,3 +38,4 @@
 * frityay.png: [thatguy1945](http://thatguy1945.deviantart.com/art/Apple-Fritter-hugs-344202644)
 * fritspet.png: [nano23823](http://nano23823.deviantart.com/art/Apple-Fritter-s-pet-beaver-438987437)
 * fritter.png: [stewartisme](http://stewartisme.deviantart.com/art/Apple-Fritter-346155425)
+* hardhatfrits.png: [nano23823](http://nano23823.deviantart.com/art/Hard-Hat-Frits-489243103)
