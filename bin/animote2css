@@ -13,10 +13,11 @@
 $vendpfs = ["-webkit-", "-moz-", "-o-", ""]
 
 # remove temporary files
-def clean(emote, framedir)
+def clean(emote, framedir, lastwd)
   Dir.chdir(framedir)
   FileUtils.rm(Dir.glob(emote + "*png"))
   FileUtils.rm(Dir.glob(emote + "*txt"))
+  Dir.chdir(lastwd)
   FileUtils.rmdir(framedir)
 end
 
@@ -25,7 +26,7 @@ def disassemble(edir, efile, emote)
   framedir = Dir.tmpdir + "/" + emote + "." + Process.pid.to_s
   FileUtils.mkdir(framedir)
   FileUtils.cp(edir + "/" +  efile, framedir + "/" + efile)
-  system("apngdis " + framedir + "/" + efile + " " + emote + "_frame > /dev/null 2>&1")
+  system("apngdis " + framedir + "/" + efile + " " + emote + "_frame > " + $bitbucket)
   return framedir
 end
 
@@ -119,7 +120,7 @@ def makesheet(edir, emote, framedir)
   rescue Exception
     puts "Could not write: " + edir + "/" + emote + "-sheet.png"
   end
-  system("optipng " + edir + "/" + emote + "-sheet.png > /dev/null 2>&1")
+  system("optipng -quiet " + edir + "/" + emote + "-sheet.png > " + $bitbucket)
   return ex, ey
 end
 
@@ -141,9 +142,17 @@ end
 
 require 'pathname'    # used for cheating
 require 'fileutils'   # used to manage temp files
-require 'tmpdir'      # yay we're cross-platform!
+require 'rbconfig'    # used to check for mswin
+require 'tmpdir'      # used for cross-platform tmp dir
 require 'RMagick'     # used to get image properties
 include Magick
+
+# find appropriate bitbucket, as per OS
+if(RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
+  $bitbucket = "NUL"
+else
+  $bitbucket = "/dev/null 2>&1"
+end
 
 # check our input
 apngs = ARGV.reverse
@@ -153,6 +162,7 @@ if(apngs.length == 0)
 end
 
 # convert each file given
+lastwd = Dir.getwd
 while(apngs.length != 0)
   apng = apngs.pop
   if(!File.readable?(apng))
@@ -168,6 +178,6 @@ while(apngs.length != 0)
     ex, ey = makesheet(edir, emote, framedir)
     puts "", "Created " + edir + "/" + emote + "-sheet.png", ""
     makerules(emote, ex, ey, framedir)
-    clean(emote, framedir)
+    clean(emote, framedir, lastwd)
   end
 end
