@@ -22,7 +22,7 @@ end
 
 # run apngdis on the source file
 def disassemble(edir, efile, emote)
-  framedir = "/tmp/" + emote + "." + Process.pid.to_s
+  framedir = Dir.tmpdir + "/" + emote + "." + Process.pid.to_s
   FileUtils.mkdir(framedir)
   FileUtils.cp(edir + "/" +  efile, framedir + "/" + efile)
   system("apngdis " + framedir + "/" + efile + " " + emote + "_frame > /dev/null 2>&1")
@@ -141,6 +141,7 @@ end
 
 require 'pathname'    # used for cheating
 require 'fileutils'   # used to manage temp files
+require 'tmpdir'      # yay we're cross-platform!
 require 'RMagick'     # used to get image properties
 include Magick
 
