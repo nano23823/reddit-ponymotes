@@ -6,6 +6,7 @@ This repository contains emotes for several MLP related subs on reddit:
 * [/r/AppleFritter](http://www.reddit.com/r/AppleFritter/)
 * [/r/Blossomforth](http://www.reddit.com/r/Blossomforth/)
 * [/r/CheeseSandwichmlp](http://www.reddit.com/r/CheeseSandwichmlp/)
+* [/r/StarlightGlimmer](http://www.reddit.com/r/StarlightGlimmer/)
 
 See the credits file in each sub's directory for source links. MLP and related characters remain the property of Hasbro.
 

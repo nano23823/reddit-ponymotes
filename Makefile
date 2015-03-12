@@ -1,4 +1,4 @@
-SUBREDDITS = AppleFritter Blossomforth CheeseSandwichmlp
+SUBREDDITS = AppleFritter Blossomforth CheeseSandwichmlp StarlightGlimmer
 
 .PHONY: all clean $(SUBREDDITS)
 
