@@ -7,3 +7,5 @@
 * starlighthuman.png: [geekladd](http://geekladd.deviantart.com/art/Equestria-Girls-Starlight-Glimmer-517598002)
 * fillystarlight.png: [avisola](http://avisola.deviantart.com/art/Starlight-Glimmer-filly-521164784)
 * cutestarlight.png: [nano23823](http://nano23823.deviantart.com/art/Cute-Starlight-Glimmer-524844765)
+* starlight-glimmer-trotting.gif: [Botchan-MLP](http://botchan-mlp.deviantart.com/art/Starlight-Glimmer-trotting-525319878)
+* starlight-glimmer-idle.gif: [Botchan-MLP](http://botchan-mlp.deviantart.com/art/Starlight-Glimmer-idle-525319943)
